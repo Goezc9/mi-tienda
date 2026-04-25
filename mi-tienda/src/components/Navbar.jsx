@@ -11,6 +11,9 @@ function Navbar() {
           <Link to="/acerca-de" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
             Acerca de
           </Link>
+          <Link to="/acceso" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
+            Acceso
+          </Link>
         </div>
       </div>
     </nav>

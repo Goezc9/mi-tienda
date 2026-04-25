@@ -1,10 +1,27 @@
 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import About from './pages/About'
 
 function App() {
-
   return (
-    <h1 className="text-red-500">Mi Tienda Hola</h1>
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/acerca-de" element={<About />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   )
 }
 
+
+
 export default App
+
+

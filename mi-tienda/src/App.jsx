@@ -11,8 +11,8 @@ function App() {
       <main className="w-screen">
         <Routes>
           <Route path="/inicio" element={<Home />} />
-          <Route path="/acerca-de" element={<About />} />
-          <Route path="/acceso" element={<Auth />} />
+          <Route path="/sobre-nosotros" element={<About />} />
+          <Route path="/iniciar-sesion" element={<Auth />} />
         </Routes>
       </main>
     </>

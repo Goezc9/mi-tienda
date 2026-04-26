@@ -1,8 +1,4 @@
-
-
-
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy Mi Tienda to Pages
 
 on:
   push:
@@ -16,38 +12,38 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: Set up Node
+
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: 'npm'
+          # Buscamos el lock file dentro de la subcarpeta
+          cache-dependency-path: mi-tienda/package-lock.json
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./mi-tienda
 
       - name: Build project
         run: npm run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+        working-directory: ./mi-tienda
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Si usas Vite es 'dist', si es React plano suele ser 'build'
-          path: './dist' 
+          # Subimos la carpeta dist que está dentro de mi-tienda
+          path: ./mi-tienda/dist
 
       - name: Deploy to GitHub Pages
         id: deployment

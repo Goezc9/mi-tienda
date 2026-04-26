@@ -1,4 +1,4 @@
-name: Deploy Mi Tienda to Pages
+name: Deploy Mi Tienda
 
 on:
   push:
@@ -9,10 +9,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -27,24 +23,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
-          # Buscamos el lock file dentro de la subcarpeta
-          cache-dependency-path: mi-tienda/package-lock.json
 
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./mi-tienda
-
-      - name: Build project
-        run: npm run build
-        working-directory: ./mi-tienda
+      - name: Install and Build
+        run: |
+          cd mi-tienda
+          npm install
+          npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Subimos la carpeta dist que está dentro de mi-tienda
+          # Si después del build ves que la carpeta se crea dentro de mi-tienda:
           path: ./mi-tienda/dist
 
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4

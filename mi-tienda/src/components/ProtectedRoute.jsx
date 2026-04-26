@@ -2,12 +2,14 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 /**
- * Envuelve rutas que requieren sesión activa.
+ * Guarda rutas que requieren sesión activa.
+ * Uso: <Route path="/inicio" element={<ProtectedRoute element={<Home />} />} />
+ *
  * - Si Firebase aún está verificando → muestra pantalla de carga.
  * - Si no hay usuario  → redirige a /iniciar-sesion.
- * - Si hay usuario     → renderiza los children normalmente.
+ * - Si hay usuario     → renderiza el elemento recibido.
  */
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ element }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -26,7 +28,7 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/iniciar-sesion" replace />;
   }
 
-  return children;
+  return element;
 };
 
 export default ProtectedRoute;

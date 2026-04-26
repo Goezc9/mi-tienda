@@ -24,30 +24,9 @@ function AppLayout() {
           <Route path="/" element={<Navigate to="/iniciar-sesion" replace />} />
 
           {/* Rutas protegidas — solo accesibles con sesión activa */}
-          <Route
-            path="/inicio"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/sobre-nosotros"
-            element={
-              <ProtectedRoute>
-                <About />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/carrito"
-            element={
-              <ProtectedRoute>
-                <Cart />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/inicio" element={<ProtectedRoute element={<Home />} />} />
+          <Route path="/sobre-nosotros" element={<ProtectedRoute element={<About />} />} />
+          <Route path="/carrito" element={<ProtectedRoute element={<Cart />} />} />
 
           {/* Cualquier ruta desconocida → inicio de sesión */}
           <Route path="*" element={<Navigate to="/iniciar-sesion" replace />} />

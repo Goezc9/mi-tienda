@@ -2,7 +2,7 @@ name: Deploy Mi Tienda
 
 on:
   push:
-    branches: ["main"]
+    branches: ["master"]
   workflow_dispatch:
 
 permissions:
